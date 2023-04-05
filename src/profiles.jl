@@ -1,5 +1,5 @@
-# res_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\amdahl_benchmarks\\results"
-res_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
+# data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\amdahl_benchmarks\\results"
+data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
 using Plots
 using DataFrames, SolverBenchmark, SolverTools
 using JLD2
@@ -7,14 +7,14 @@ using CSV
 # using FileIO
 
 function solvers_dict(
-  res_path::String;
+  data_path::String;
   type::String = "lp", # "qp" for quadraticproblems
   run_cplex::Bool = false,
   run_gurobi::Bool = false,
   run_xpress::Bool = false,
   )
 
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   run_cplex && (cplex1_stats = open_file(string("cplex1_", type)))
   run_gurobi && (gurobi1_stats = open_file(string("gurobi1_", type)))
   run_xpress && (xpress1_stats = open_file(string("xpress1_", type)))
@@ -31,13 +31,13 @@ function solvers_dict(
 end
 
 function factorizations_dict(
-  res_path::String;
+  data_path::String;
   type::String = "lp", # "qp" for quadraticproblems
   run_ma57::Bool = false,
   run_ma97::Bool = false,
   )
 
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp1_stats = open_file(string("ripqp1_", type)) # compare commercial solvs + cc1
   ripqp_qdldl_stats = open_file(string("ripqp_qdldl1_", type))
   ripqp_cholmod_stats = open_file(string("ripqp_cholmod1_", type))
@@ -54,36 +54,36 @@ function factorizations_dict(
   return out_dict
 end
 
-function centrality_corr_dict(res_path::String; type::String = "lp")
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+function centrality_corr_dict(data_path::String; type::String = "lp")
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp1_stats = open_file(string("ripqp1_", type)) # compare commercial solvs + cc1
   ripqp_cc1_stats = open_file(string("ripqp_cc1_", type))
   return Dict(:ripqp => ripqp1_stats, :ripqp_cc => ripqp_cc1_stats)
 end
 
-function multi_dict(res_path::String; type::String = "lp")
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+function multi_dict(data_path::String; type::String = "lp")
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp1_stats = open_file(string("ripqp1_", type))
   ripqp_multi1_stats = open_file(string("ripqp_multi1_", type))
   return Dict(:ripqp => ripqp1_stats, :ripqp_multi => ripqp_multi1_stats)
 end
 
-function multi_ma57_dict(res_path::String; type::String = "lp")
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+function multi_ma57_dict(data_path::String; type::String = "lp")
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp_ma57_stats = open_file(string("ripqp_ma57", type))
   ripqp_ma57_multi_stats = open_file(string("ripqp_ma57_multi1_", type))
   return Dict(:ripqp_ma57 => ripqp_ma57_stats, :ripqp_ma57_multi => ripqp_ma57_multi_stats)
 end
 
-function multi2_ma57_dict(res_path::String; type::String = "lp")
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+function multi2_ma57_dict(data_path::String; type::String = "lp")
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp_ma57_stats = open_file(string("ripqp_ma57", type))
   ripqp_ma57_multi2_stats = open_file(string("ripqp_ma57_multi2_", type))
   return Dict(:ripqp_ma57 => ripqp_ma57_stats, :ripqp_ma57_multi2 => ripqp_ma57_multi2_stats)
 end
 
-function multi_ma57_all_dict(res_path::String; type::String = "lp")
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+function multi_ma57_all_dict(data_path::String; type::String = "lp")
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp_ma57_stats = open_file(string("ripqp_ma57", type))
   ripqp_ma57_multi_stats = open_file(string("ripqp_ma57_multi1_", type))
   ripqp_ma57_multi2_stats = open_file(string("ripqp_ma57_multi2_", type))
@@ -94,8 +94,8 @@ function multi_ma57_all_dict(res_path::String; type::String = "lp")
   )
 end
 
-function multifact_dict(res_path::String; type::String = "lp")
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+function multifact_dict(data_path::String; type::String = "lp")
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp_multi1_stats = open_file(string("ripqp_multi1_", type))
   ripqp_ldlprecond1_stats = open_file(string("ripqp_ldlprecond1_", type)) # regu1 1.0e-8, stop crit 64, no equi
   ripqp_ldlprecond2_stats = open_file(string("ripqp_ldlprecond2_", type)) # regu1 1.0e-8 equi
@@ -106,8 +106,8 @@ function multifact_dict(res_path::String; type::String = "lp")
   )
 end
 
-function multifact_limited_dict(res_path::String; type::String = "lp")
-  open_file(fname; res_path = res_path) = CSV.read(joinpath(res_path, string(fname, ".csv")), DataFrame)
+function multifact_limited_dict(data_path::String; type::String = "lp")
+  open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
   ripqp_ldlprecond1_stats = open_file(string("ripqp_ldlprecond1_", type)) # regu1 1.0e-8, stop crit 64, no equi
   ripqp_lldlprecond1_stats = open_file(string("ripqp_lldlprecond_", type)) # regu1 1.0e-8, stop crit 64, no equi, new regu_try_catch
   return Dict(
@@ -190,8 +190,8 @@ function mm_profile_energy(stats, save_path::String)
 end
 
 function save_all_profiles(
-  res_path::String,
-  save_dir::String;
+  data_path::String,
+  profile_path::String;
   plot_extension::String = ".pdf",
   run_cplex::Bool = false,
   run_gurobi::Bool = false,
@@ -201,74 +201,74 @@ function save_all_profiles(
 )
 
   solver_stats_lp = solvers_dict(
-    res_path;
+    data_path;
     type = "lp",
     run_cplex = run_cplex,
     run_gurobi = run_gurobi,
     run_xpress = run_xpress,
   )
-  netlib_profile_time(solver_stats_lp, string(save_dir, "solvers_time_lp", plot_extension)) # fig 2
+  netlib_profile_time(solver_stats_lp, string(profile_path, "solvers_time_lp", plot_extension)) # fig 2
   solver_stats_qp = solvers_dict(
-    res_path;
+    data_path;
     type = "qp",
     run_cplex = run_cplex,
     run_gurobi = run_gurobi,
     run_xpress = run_xpress,
   )
-  mm_profile_time(solver_stats_qp, string(save_dir, "solvers_time_qp", plot_extension)) # fig 3
+  mm_profile_time(solver_stats_qp, string(profile_path, "solvers_time_qp", plot_extension)) # fig 3
 
   factorization_stats_lp = factorizations_dict(
-    res_path;
+    data_path;
     type = "lp",
     run_ma57 = run_ma57,
     run_ma97 = run_ma97,
   )
-  netlib_profile_time(factorization_stats_lp, string(save_dir, "factorizations_time_lp", plot_extension)) # fig 4
+  netlib_profile_time(factorization_stats_lp, string(profile_path, "factorizations_time_lp", plot_extension)) # fig 4
   factorization_stats_qp = factorizations_dict(
-    res_path;
+    data_path;
     type = "lp",
     run_ma57 = run_ma57,
     run_ma97 = run_ma97,
   )
-  mm_profile_time(factorization_stats_qp, string(save_dir, "factorizations_time_qp", plot_extension)) # fig 5
+  mm_profile_time(factorization_stats_qp, string(profile_path, "factorizations_time_qp", plot_extension)) # fig 5
 
-  stats_cc_lp = centrality_corr_dict(res_path; type = "lp")
-  netlib_profile_time(stats_cc_lp, string(save_dir, "cc_time_lp", plot_extension)) # fig 6
-  stats_cc_qp = centrality_corr_dict(res_path; type = "qp")
-  mm_profile_time(stats_cc_qp, string(save_dir, "cc_time_qp", plot_extension)) # fig 7
+  stats_cc_lp = centrality_corr_dict(data_path; type = "lp")
+  netlib_profile_time(stats_cc_lp, string(profile_path, "cc_time_lp", plot_extension)) # fig 6
+  stats_cc_qp = centrality_corr_dict(data_path; type = "qp")
+  mm_profile_time(stats_cc_qp, string(profile_path, "cc_time_qp", plot_extension)) # fig 7
 
-  stats_multi_lp = multi_dict(res_path; type = "lp")
-  netlib_profile_energy(stats_multi_lp, string(save_dir, "multi_energy_lp", plot_extension)) # fig 8
-  stats_multi_qp = multi_dict(res_path; type = "qp")
-  mm_profile_energy(stats_multi_qp, string(save_dir, "multi_energy_qp", plot_extension)) # fig 9
+  stats_multi_lp = multi_dict(data_path; type = "lp")
+  netlib_profile_energy(stats_multi_lp, string(profile_path, "multi_energy_lp", plot_extension)) # fig 8
+  stats_multi_qp = multi_dict(data_path; type = "qp")
+  mm_profile_energy(stats_multi_qp, string(profile_path, "multi_energy_qp", plot_extension)) # fig 9
 
   if run_ma57
-    stats_ma57_mutli1_lp = multi_ma57_dict(res_path; type = "lp")
-    netlib_profile_time(stats_ma57_mutli1_lp, string(save_dir, "ma57_multi1_time_lp", plot_extension)) # fig 10
-    stats_ma57_mutli1_qp = multi_ma57_dict(res_path; type = "qp")
-    mm_profile_time(stats_ma57_mutli1_qp, string(save_dir, "ma57_multi1_time_qp", plot_extension)) # fig 11
+    stats_ma57_mutli1_lp = multi_ma57_dict(data_path; type = "lp")
+    netlib_profile_time(stats_ma57_mutli1_lp, string(profile_path, "ma57_multi1_time_lp", plot_extension)) # fig 10
+    stats_ma57_mutli1_qp = multi_ma57_dict(data_path; type = "qp")
+    mm_profile_time(stats_ma57_mutli1_qp, string(profile_path, "ma57_multi1_time_qp", plot_extension)) # fig 11
 
-    stats_ma57_mutli2_lp = multi2_ma57_dict(res_path; type = "lp")
-    netlib_profile_time(stats_ma57_mutli2_lp, string(save_dir, "ma57_multi2_time_lp", plot_extension)) # fig 12
-    stats_ma57_mutli2_qp = multi2_ma57_dict(res_path; type = "qp")
-    mm_profile_time(stats_ma57_mutli2_qp, string(save_dir, "ma57_multi2_time_qp", plot_extension)) # fig 13
+    stats_ma57_mutli2_lp = multi2_ma57_dict(data_path; type = "lp")
+    netlib_profile_time(stats_ma57_mutli2_lp, string(profile_path, "ma57_multi2_time_lp", plot_extension)) # fig 12
+    stats_ma57_mutli2_qp = multi2_ma57_dict(data_path; type = "qp")
+    mm_profile_time(stats_ma57_mutli2_qp, string(profile_path, "ma57_multi2_time_qp", plot_extension)) # fig 13
 
-    stats_ma57_mutli_all_lp = multi_ma57_all_dict(res_path; type = "lp")
-    netlib_profile_energy(stats_ma57_mutli_all_lp, string(save_dir, "ma57_multi_all_energy_lp", plot_extension)) # fig 14
-    stats_ma57_mutli_all_qp = multi_ma57_all_dict(res_path; type = "qp")
-    mm_profile_energy(stats_ma57_mutli_all_qp, string(save_dir, "ma57_multi_all_energy_qp", plot_extension)) # fig 15
+    stats_ma57_mutli_all_lp = multi_ma57_all_dict(data_path; type = "lp")
+    netlib_profile_energy(stats_ma57_mutli_all_lp, string(profile_path, "ma57_multi_all_energy_lp", plot_extension)) # fig 14
+    stats_ma57_mutli_all_qp = multi_ma57_all_dict(data_path; type = "qp")
+    mm_profile_energy(stats_ma57_mutli_all_qp, string(profile_path, "ma57_multi_all_energy_qp", plot_extension)) # fig 15
   end
 
-  stats_mutlifact_lp = multifact_dict(res_path; type = "lp")
-  netlib_profile_energy2(stats_mutlifact_lp, string(save_dir, "multifact_energy_lp", plot_extension)) # fig 16
-  stats_mutlifact_qp = multifact_dict(res_path; type = "qp")
-  mm_profile_energy2(stats_mutlifact_qp, string(save_dir, "multifact_energy_qp", plot_extension)) # fig 17
+  stats_mutlifact_lp = multifact_dict(data_path; type = "lp")
+  netlib_profile_energy2(stats_mutlifact_lp, string(profile_path, "multifact_energy_lp", plot_extension)) # fig 16
+  stats_mutlifact_qp = multifact_dict(data_path; type = "qp")
+  mm_profile_energy2(stats_mutlifact_qp, string(profile_path, "multifact_energy_qp", plot_extension)) # fig 17
 
-  stats_mutlifact_lim_lp = multifact_limited_dict(res_path; type = "lp")
-  netlib_profile_energy2(stats_mutlifact_lim_lp, string(save_dir, "multifact_limited_energy_lp", plot_extension)) # fig 18
-  stats_mutlifact_lim_qp = multifact_limited_dict(res_path; type = "qp")
-  mm_profile_energy2(stats_mutlifact_lim_qp, string(save_dir, "multifact_limited_energy_qp", plot_extension)) # fig 19
+  stats_mutlifact_lim_lp = multifact_limited_dict(data_path; type = "lp")
+  netlib_profile_energy2(stats_mutlifact_lim_lp, string(profile_path, "multifact_limited_energy_lp", plot_extension)) # fig 18
+  stats_mutlifact_lim_qp = multifact_limited_dict(data_path; type = "qp")
+  mm_profile_energy2(stats_mutlifact_lim_qp, string(profile_path, "multifact_limited_energy_qp", plot_extension)) # fig 19
 
-  netlib_profile_time(stats_mutlifact_lim_lp, string(save_dir, "multifact_limited_time_lp", plot_extension)) # fig 20
-  netlib_profile_time(stats_mutlifact_lim_qp, string(save_dir, "multifact_limited_time_qp", plot_extension)) # fig 21
+  netlib_profile_time(stats_mutlifact_lim_lp, string(profile_path, "multifact_limited_time_lp", plot_extension)) # fig 20
+  netlib_profile_time(stats_mutlifact_lim_qp, string(profile_path, "multifact_limited_time_qp", plot_extension)) # fig 21
 end

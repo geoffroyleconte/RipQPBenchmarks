@@ -41,7 +41,7 @@ function optimize_ripqp(path_pb :: String, ripqp_func :: Function)
 end
 
 function run_benchmarks_solvers(
-  save_path::String,
+  save_path::String;
   run_cplex::Bool = false,
   run_gurobi::Bool = false,
   run_xpress::Bool = false,
