@@ -1,0 +1,15 @@
+[deps]
+CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
+DoubleFloats = "497a8b3b-efae-58df-a0af-a86822472b78"
+HSL = "34c5aeac-e683-54a6-a0e9-6e0fdc586c50"
+QDLDL = "bfc457fd-c171-5ab7-bd9e-d5dbfc242d63"
+QPSReader = "10f199a5-22af-520b-b891-7ce84a7b1bd0"
+Quadmath = "be4d8f0f-7fa4-5f49-b795-2f01399ab2dd"
+QuadraticModels = "f468eda6-eac5-11e8-05a5-ff9e497bcd19"
+RipQP = "1e40b3f8-35eb-4cd8-8edd-3e515bb9de08"
+SolverBenchmark = "581a75fa-a23a-52d0-a590-d6201de2218a"
+
+[compat]
+QPSReader = "0.2"
+QuadraticModels = "0.9"
+RipQP = "0.6"
