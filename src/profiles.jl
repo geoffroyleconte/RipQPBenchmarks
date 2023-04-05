@@ -2,7 +2,6 @@
 data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
 using Plots
 using DataFrames, SolverBenchmark, SolverTools
-using JLD2
 using CSV
 # using FileIO
 

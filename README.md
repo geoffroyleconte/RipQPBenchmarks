@@ -52,4 +52,13 @@ save_all_profiles(
 )
 ```
 
-where `data_path` is the path containing the results of the benchmarks (`save_path` of the previous section) and `profile_path` is the path where the profiles should be saved. 
+where `data_path` is the path containing the results of the benchmarks (`save_path` of the previous section) and `profile_path` is the path where the profiles should be saved.
+
+## Getting the benchmark tables in quadruple precision
+
+```julia
+quad_prec_table(data_path; latex = false)
+```
+
+where `data_path` is the path containing the results of the benchmarks (`save_path` of the benchmark section).
+Use `latex = true` to get the tables in LaTeX formatting.
