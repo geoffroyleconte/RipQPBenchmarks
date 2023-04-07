@@ -173,7 +173,7 @@ function netlib_profile_energy(stats, save_path::String)
   savefig(perf, save_path)
 end
 
-function mm_profile_energy(stats, save_path::String)
+function mm_profile_time(stats, save_path::String)
   pgfplotsx()
   perf = performance_profile(stats, dfstat_time, legend=:bottomright, b = SolverBenchmark.BenchmarkProfiles.PGFPlotsXBackend())
   title!("Performance profile (Maros and Meszaros problems)")

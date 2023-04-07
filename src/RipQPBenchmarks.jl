@@ -1,13 +1,18 @@
-module RipQP
+module RipQPBenchmarks
 
 # deps for benchmarks
 using QuadraticModels, QPSReader
-using QuadraticModelsGurobi, QuadraticModelsCPLEX, QuadraticModelsXpress
+using QuadraticModelsGurobi, QuadraticModelsCPLEX
 using CSV
 using SolverBenchmark
 using HSL, QDLDL
 using Quadmath, DoubleFloats
 using RipQP
+
+using Requires
+function __init__()
+  @require QuadraticModelsXpress = "2cf8c267-6e70-4ce4-bd8d-41913dbccd90" using QuadraticModelsXpress
+end
 
 # deps for results
 using Plots
