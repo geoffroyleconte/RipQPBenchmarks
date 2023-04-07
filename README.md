@@ -54,7 +54,7 @@ save_all_profiles(
 
 where `data_path` is the path containing the results of the benchmarks (`save_path` of the previous section) and `profile_path` is the path where the profiles should be saved.
 
-## Getting the benchmark tables in quadruple precision
+## Get the benchmark tables in quadruple precision
 
 ```julia
 quad_prec_table(data_path; latex = false)
@@ -62,3 +62,17 @@ quad_prec_table(data_path; latex = false)
 
 where `data_path` is the path containing the results of the benchmarks (`save_path` of the benchmark section).
 Use `latex = true` to get the tables in LaTeX formatting.
+
+## Get the smallest residual values for multiquad2 algorithm
+
+```julia
+using Float128
+T = Float128
+path_pb_quad = "/problems" # path to /problems
+qm_TMA_ME = createQuadraticModel_T(readqps(string(path_pb_quad, "/TMA_ME.mps")), T=T)
+stats_TMA_ME = ripqp_multi_quad2_small_res(qm_TMA_ME)
+qm_GlcAerWT = createQuadraticModel_T(readqps(string(path_pb_quad, "/GlcAerWT.mps")), T=T)
+stats_GlcAerWT = ripqp_multi_quad2_small_res(qm_GlcAerWT)
+qm_GlcAlift = createQuadraticModel_T(readqps(string(path_pb_quad, "/GlcAlift.mps")), T=T)
+stats_GlcAlift = ripqp_multi_quad2_small_res(qm_GlcAlift)
+```

@@ -1,8 +1,6 @@
-data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
-using Plots
-using DataFrames, SolverBenchmark, SolverTools
-using CSV
-using PrettyTables
+export quad_prec_table
+
+# data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
 # using FileIO
 
 function quad_prec_table(data_path::String; latex::Bool = false)

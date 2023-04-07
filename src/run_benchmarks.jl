@@ -1,9 +1,4 @@
-using QuadraticModels, QPSReader
-using QuadraticModelsGurobi, QuadraticModelsCPLEX, QuadraticModelsXpress
-using CSV
-using SolverBenchmark
-using HSL, QDLDL
-using RipQP
+export run_benchmarks_solvers, run_benchmarks_quad, createQuadraticModel_T
 
 function createQuadraticModel(qpdata; name="qp_pb")
     return QuadraticModel(qpdata.c, qpdata.qrows, qpdata.qcols, qpdata.qvals,
@@ -212,8 +207,6 @@ function run_benchmarks_solvers(
 
   # save_problems(string(save_path, "/ripqp_ldlprecondma57"), ripqp_ldlprecond)
 end
-
-using Quadmath, DoubleFloats
 
 function createQuadraticModel_T(qpdata; T = Float128, name="qp_pb")
     return QuadraticModel(convert(Array{T}, qpdata.c), qpdata.qrows, qpdata.qcols,

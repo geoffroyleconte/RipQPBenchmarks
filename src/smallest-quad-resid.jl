@@ -1,0 +1,47 @@
+export ripqp_multi_quad2_small_res
+
+ripqp_multi_quad2_small_res(qm; T = T, Tlow = Tlow) = ripqp(
+  qm, 
+  mode = :multi,
+  early_multi_stop = false,
+  sp = K2KrylovParams{Tlow}( # solve in Float64
+    uplo = :U,
+    kmethod=:gmres,
+    form_mat = true,
+    equilibrate = false,
+    itmax = 100,
+    mem = 100,
+    preconditioner = LDL(T = Tlow, pos = :R, warm_start = true),
+    ρ_min=1.0e-15,
+    δ_min = 1.0e-15,
+    atol_min = 1.0e-16,
+    rtol_min = 1.0e-16,
+  ),
+    sp2 = K2KrylovParams{T}( # solve in Float128
+    uplo = :U,
+    kmethod=:gmres,
+    form_mat = true,
+    equilibrate = false,
+    itmax = 5,
+    mem = 5,
+    preconditioner = LDL(T = T, pos = :R, warm_start = true),
+    ρ_min=T(1.0e-15),
+    δ_min = T(1.0e-15),
+    atol_min = T(1.0e-16),
+    rtol_min = T(1.0e-16),
+  ),
+  solve_method=IPF(),
+  solve_method2=PC(),
+  itol = InputTol(
+    T,
+    max_iter = 7000,
+    max_time = 20000.0,
+    max_iter1 = 100,
+    ϵ_pdd1 = T(1.0e1),
+    ϵ_rc1 = T(1.0e-6),
+    ϵ_rb1 = T(1.0e-6),
+    ϵ_rb = T(1e-40),
+  ),
+  display = true,
+)
+stats = ripqp_multi_quad2_small_res(qm1)

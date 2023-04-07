@@ -1,8 +1,7 @@
+export solvers_dict, save_all_profiles
+
 # data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\amdahl_benchmarks\\results"
-data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
-using Plots
-using DataFrames, SolverBenchmark, SolverTools
-using CSV
+# data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
 # using FileIO
 
 function solvers_dict(
