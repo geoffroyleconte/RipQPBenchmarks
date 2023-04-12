@@ -24,5 +24,6 @@ include("install-deps.jl")
 include("run_benchmarks.jl")
 include("profiles.jl")
 include("quad-table.jl")
+include("smallest-quad-resid.jl")
 
 end

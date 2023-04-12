@@ -1,6 +1,6 @@
 export ripqp_multi_quad2_small_res
 
-ripqp_multi_quad2_small_res(qm; T = T, Tlow = Tlow) = ripqp(
+ripqp_multi_quad2_small_res(qm; max_iter = 700, T = Float128, Tlow = Float64) = ripqp(
   qm, 
   mode = :multi,
   early_multi_stop = false,
@@ -34,7 +34,7 @@ ripqp_multi_quad2_small_res(qm; T = T, Tlow = Tlow) = ripqp(
   solve_method2=PC(),
   itol = InputTol(
     T,
-    max_iter = 7000,
+    max_iter = max_iter,
     max_time = 20000.0,
     max_iter1 = 100,
     ϵ_pdd1 = T(1.0e1),
@@ -44,4 +44,3 @@ ripqp_multi_quad2_small_res(qm; T = T, Tlow = Tlow) = ripqp(
   ),
   display = true,
 )
-stats = ripqp_multi_quad2_small_res(qm1)

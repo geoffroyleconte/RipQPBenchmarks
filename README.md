@@ -66,13 +66,13 @@ Use `latex = true` to get the tables in LaTeX formatting.
 ## Get the smallest residual values for multiquad2 algorithm
 
 ```julia
-using Float128
+using Quadmath
 T = Float128
 path_pb_quad = "/problems" # path to /problems
-qm_TMA_ME = createQuadraticModel_T(readqps(string(path_pb_quad, "/TMA_ME.mps")), T=T)
-stats_TMA_ME = ripqp_multi_quad2_small_res(qm_TMA_ME)
-qm_GlcAerWT = createQuadraticModel_T(readqps(string(path_pb_quad, "/GlcAerWT.mps")), T=T)
-stats_GlcAerWT = ripqp_multi_quad2_small_res(qm_GlcAerWT)
-qm_GlcAlift = createQuadraticModel_T(readqps(string(path_pb_quad, "/GlcAlift.mps")), T=T)
-stats_GlcAlift = ripqp_multi_quad2_small_res(qm_GlcAlift)
+qm_TMA_ME = createQuadraticModel_T(readqps(joinpath(path_pb_quad, "TMA_ME.mps")), T=T)
+stats_TMA_ME = ripqp_multi_quad2_small_res(qm_TMA_ME; max_iter = 174)
+qm_GlcAerWT = createQuadraticModel_T(readqps(joinpath(path_pb_quad, "GlcAerWT.mps")), T=T)
+stats_GlcAerWT = ripqp_multi_quad2_small_res(qm_GlcAerWT; max_iter = 319)
+qm_GlcAlift = createQuadraticModel_T(readqps(joinpath(path_pb_quad, "GlcAlift.mps")), T=T)
+stats_GlcAlift = ripqp_multi_quad2_small_res(qm_GlcAlift; max_iter = 709)
 ```
