@@ -1,6 +1,3 @@
-save_tbl_path = raw"C:\Users\Geoffroy Leconte\Documents\doctorat\biblio\papiers\ripqp\paper\tables"
-using PrettyTables
-
 safe_latex_customstring(s::AbstractString) = "\\(" * replace(s, "_" => "\\_") * "\\)"
 function safe_latex_customstring(col::Integer)
   # by this point, the table value should already have been converted to a string

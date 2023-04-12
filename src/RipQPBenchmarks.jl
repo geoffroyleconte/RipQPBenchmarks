@@ -4,7 +4,6 @@ module RipQPBenchmarks
 using QuadraticModels, QPSReader
 using QuadraticModelsGurobi, QuadraticModelsCPLEX
 using CSV
-using SolverBenchmark
 using HSL, QDLDL
 using Quadmath, DoubleFloats
 using RipQP
@@ -16,7 +15,9 @@ end
 
 # deps for results
 using Plots
+using PGFPlotsX
 using DataFrames, SolverTools
+using SolverBenchmark
 using PrettyTables
 
 include("install-deps.jl")
