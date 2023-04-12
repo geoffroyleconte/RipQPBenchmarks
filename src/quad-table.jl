@@ -24,6 +24,7 @@ function quad_prec_table(data_path::String; latex::Bool = false)
     "pfeas",
     "dfeas",
   ]
+  nh = length(header2)
   data2 = Matrix{Any}(undef, 12, nh)
   row_names2 = []
   for pb_index in 1:3
@@ -56,7 +57,7 @@ function quad_prec_table(data_path::String; latex::Bool = false)
       "mono",
       ripqp_mono1.elapsed_time[pb_index],
       0,
-      ripqp_mono1.iters_sp[pb_index],
+      ripqp_mono1.iter[pb_index],
       ripqp_mono1.objective[pb_index],
       ripqp_mono1.pdd[pb_index],
       ripqp_mono1.primal_feas[pb_index],
@@ -94,7 +95,6 @@ function quad_prec_table(data_path::String; latex::Bool = false)
       title = "bm ripqp quad prec",
       body_hlines = [4, 8],
       formatters = (ft_printf(["%7.1e", "%d", "%d", "%7.1e","%7.1e","%7.1e","%7.1e"], 2:8),
-        (v, i, j) -> (SolverBenchmark.safe_latex_AbstractFloat(v)),
         )
       )
   end

@@ -263,9 +263,15 @@ function run_benchmarks_quad(save_path::String)
   # compile
   path_pb_lp = fetch_netlib()
   qm1 = createQuadraticModel_T(readqps(string(path_pb_lp, "/AFIRO.SIF")), T=T)
-  ripqp_mono(qm) = ripqp(qm, itol = InputTol(T; max_iter = 800, max_time=1200.))
+  ripqp_mono(qm; T = T) = ripqp(qm, itol = InputTol(T, max_iter = 7000, max_time = 20000.0))
   stats = ripqp_mono(qm1)
-  ripqp_multi(qm) = ripqp(qm, mode=:multi, itol = InputTol(T; max_iter = 800, max_time=1200.))
+  ripqp_multi(qm; T = T, Tlow = Tlow) = ripqp(
+    qm,
+    mode = :multi,
+    early_multi_stop = false,
+    sp = K2LDLParams{Tlow}(),
+    itol = InputTol(T, max_iter = 7000, max_time = 20000.0, max_iter1 = 100),
+  )
   stats = ripqp_multi(qm1)
   ripqp_multi_quad1(qm; T = T, Tlow = Tlow) = ripqp(qm, 
     mode = :multi,
