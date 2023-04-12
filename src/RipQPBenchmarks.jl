@@ -20,7 +20,6 @@ using DataFrames, SolverTools
 using SolverBenchmark
 using PrettyTables
 
-include("install-deps.jl")
 include("run_benchmarks.jl")
 include("profiles.jl")
 include("quad-table.jl")
