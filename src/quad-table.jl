@@ -3,7 +3,7 @@ export quad_prec_table
 # data_path = "C:\\Users\\Geoffroy Leconte\\Documents\\doctorat\\code\\docGL\\benchmarks\\ripqp_paper"
 # using FileIO
 
-function quad_prec_table(data_path::String; latex::Bool = false)
+function quad_prec_table(data_path::String, save_path::String; latex::Bool = false)
 
   open_file(fname; data_path = data_path) = CSV.read(joinpath(data_path, string(fname, ".csv")), DataFrame)
 
@@ -76,26 +76,37 @@ function quad_prec_table(data_path::String; latex::Bool = false)
   end
 
   if latex
-    return pretty_table(
+    open(joinpath(save_path, "ripqp-quad.tex"), "w") do io
+      println(io, "\\documentclass[varwidth=20cm,crop=true]{standalone}")
+      println(io, "\\usepackage{longtable}")
+      println(io, "\\begin{document}")
+      pretty_table(
+        io,
         data2; 
         header = header2,
         row_names= row_names2,
-        title = "bm ripqp quad prec",
+        title = "Benchmarks in quadruple precision",
         body_hlines = [4, 8],
         backend = Val(:latex),
         formatters = (ft_printf(["%7.1e", "%d", "%d", "%7.1e","%7.1e","%7.1e","%7.1e"], 2:8),
           (v, i, j) -> (SolverBenchmark.safe_latex_AbstractFloat(v)),
           )
-      )
-  else
-    return pretty_table(
-      data2; 
-      header = header2,
-      row_names= row_names2,
-      title = "bm ripqp quad prec",
-      body_hlines = [4, 8],
-      formatters = (ft_printf(["%7.1e", "%d", "%d", "%7.1e","%7.1e","%7.1e","%7.1e"], 2:8),
         )
-      )
+      println(io, "\\end{document}")
+    end
+  else
+    open(joinpath(save_path, "ripqp-quad.md"), "w") do io
+      pretty_table(
+        io,
+        data2; 
+        header = header2,
+        row_names= row_names2,
+        title = "Benchmarks in quadruple precision",
+        body_hlines = [4, 8],
+        formatters = (ft_printf(["%7.1e", "%d", "%d", "%7.1e","%7.1e","%7.1e","%7.1e"], 2:8),
+          )
+        )
+    end
   end
+  return nothing
 end
