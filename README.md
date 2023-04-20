@@ -57,12 +57,11 @@ where `data_path` is the path containing the results of the benchmarks (`save_pa
 ## Get the benchmark tables in quadruple precision
 
 ```julia
-quad_prec_table(data_path, table_path; latex = false)
+quad_prec_table(data_path, table_path)
 ```
 
 where `data_path` is the path containing the results of the benchmarks (`save_path` of the benchmark section)
 and `table_path` is the path where the tables should be saved.
-Use `latex = true` to get the tables in LaTeX formatting.
 
 ## Get the smallest residual values for multiquad2 algorithm
 
