@@ -15,7 +15,6 @@ end
 
 # deps for results
 using Plots
-using PGFPlotsX
 using DataFrames, SolverTools
 using SolverBenchmark
 using PrettyTables
