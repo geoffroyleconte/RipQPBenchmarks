@@ -62,4 +62,7 @@ function ripqp_all_benchmarks(
 
   smallest_quad_resid_table(save_path)
   println("smallest residuals quad precision done")
+  return nothing
+end
+
 end
