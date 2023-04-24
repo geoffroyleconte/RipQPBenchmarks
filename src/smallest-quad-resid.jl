@@ -51,9 +51,9 @@ function smallest_quad_resid_table(table_path::String)
   qm_TMA_ME = createQuadraticModel_T(readqps(joinpath(path_pb, "TMA_ME.mps")), T=T)
   stats_TMA_ME = ripqp_multi_quad2_small_res(qm_TMA_ME; max_iter = 174)
   qm_GlcAlift = createQuadraticModel_T(readqps(joinpath(path_pb, "GlcAlift.mps")), T=T)
-  stats_GlcAlift = ripqp_multi_quad2_small_res(qm_GlcAlift; max_iter = 709)
+  stats_GlcAlift = ripqp_multi_quad2_small_res(qm_GlcAlift; max_iter = 319)
   qm_GlcAerWT = createQuadraticModel_T(readqps(joinpath(path_pb, "GlcAerWT.mps")), T=T)
-  stats_GlcAerWT = ripqp_multi_quad2_small_res(qm_GlcAerWT; max_iter = 319)
+  stats_GlcAerWT = ripqp_multi_quad2_small_res(qm_GlcAerWT; max_iter = 709)
   header = ["pdd", "pfeas", "dfeas", "itertot"]
   row_names = ["TMA ME", "GlcAlift", "GlcAerWT"]
   data = [stats_TMA_ME.solver_specific[:pdd]   stats_TMA_ME.primal_feas   stats_TMA_ME.dual_feas   stats_TMA_ME.iter;
