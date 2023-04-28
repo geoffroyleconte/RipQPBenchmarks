@@ -11,7 +11,7 @@ To launch all benchmarks, you will need:
 - CPLEX and CPLEX.jl: follow the instructions at https://github.com/jump-dev/CPLEX.jl
 - Gurobi and Gurobi.jl: follow the instructions at https://github.com/jump-dev/Gurobi.jl
 - Xpress and Xpress.jl: follow the instructions at https://github.com/jump-dev/Xpress.jl
-- MA57, MA97 and HSL.jl: follow the instructions at https://github.com/JuliaSmoothOptimizers/HSL.jl
+- HSL.jl: follow the instructions at https://github.com/JuliaSmoothOptimizers/HSL.jl
 
 Then, use
 
