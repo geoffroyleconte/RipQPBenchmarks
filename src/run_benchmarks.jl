@@ -186,24 +186,39 @@ function run_benchmarks_solvers(
 
   # run benchmarks
   save_problems(string(save_path, "/ripqp1"), ripqp1)
+  println("ripqp mono done")
   run_gurobi && save_problems(string(save_path, "/gurobi1"), gurobi2)
+  run_gurobi && println("gurobi done")
   run_cplex && save_problems(string(save_path, "/cplex1"), cplex2)
+  run_cplex && println("cplex done")
   run_xpress && save_problems(string(save_path, "/xpress1"), xpress2)
+  run_xpress && println("xpress done")
 
   save_problems(string(save_path, "/ripqp_cc1"), ripqp_cc)
+  println("ripqp cc done")
 
   run_ma57 && save_problems(string(save_path, "/ripqp_ma57"), ripqpma57)
+  run_ma57 && println("ripqp ma57 done")
   run_ma97 && save_problems(string(save_path, "/ripqp_ma971"), ripqpma97)
+  run_ma97 && println("ripqp ma97 done")
   save_problems(string(save_path, "/ripqp_qdldl1"), ripqpqdldl)
+  println("ripqp qdldl done")
   save_problems(string(save_path, "/ripqp_cholmod1"), ripqpcholmod)
+  println("ripqp cholmod done")
 
   save_problems(string(save_path, "/ripqp_multi1"), ripqp_multi)
+  println("ripqp multi done")
   run_ma57 && save_problems(string(save_path, "/ripqp_ma57_multi1"), ripqpma57_multi1) # check regu
+  run_ma57 && println("ripqp ma57 multi1 done")
   run_ma57 && save_problems(string(save_path, "/ripqp_ma57_multi2"), ripqpma57_multi2) # check regu
+  run_ma57 && println("ripqp ma57 multi2 done")
 
   save_problems(string(save_path, "/ripqp_ldlprecond1"), ripqp_ldlprecond1)
+  println("ripqp ldl precond1 done")
   save_problems(string(save_path, "/ripqp_ldlprecond2"), ripqp_ldlprecond2)
+  println("ripqp ldl precond2 done")
   save_problems(string(save_path, "/ripqp_lldlprecond"), ripqp_lldlprecond)
+  println("ripqp lldl precond done")
 
   # save_problems(string(save_path, "/ripqp_ldlprecondma57"), ripqp_ldlprecond)
 end
@@ -347,7 +362,11 @@ function run_benchmarks_quad(save_path::String)
   stats = ripqp_multi_quad2(qm1)
   
   save_quad_problems(string(save_path, "/ripqp_multi1"), ripqp_multi, T = T)
+  println("ripqp multi done")
   save_quad_problems(string(save_path, "/ripqp_mono1"), ripqp_mono, T = T)
+  println("ripqp mono done")
   save_quad_problems(string(save_path, "/ripqp_multiquad1"), ripqp_multi_quad1, T = T)
+  println("ripqp multiquad1 done")
   save_quad_problems_nops(string(save_path, "/ripqp_multiquad2"), ripqp_multi_quad2, T = T)
+  println("ripqp multiquad2 done")
 end

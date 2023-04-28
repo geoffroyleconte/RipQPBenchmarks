@@ -160,43 +160,37 @@ function dfstat_energy2(df)
 end
 
 function netlib_profile_time(stats, save_path::String)
-  pgfplotsx()
-  perf = performance_profile(stats, dfstat_time, legend=:bottomright, b = SolverBenchmark.BenchmarkProfiles.PGFPlotsXBackend())
+  perf = performance_profile(stats, dfstat_time, legend=:bottomright)
   title!("Performance profile (Netlib problems)")
   savefig(perf, save_path)
 end
 
 function netlib_profile_energy(stats, save_path::String)
-  pgfplotsx()
-  perf = performance_profile(stats, dfstat_energy, legend=:bottomright, b = SolverBenchmark.BenchmarkProfiles.PGFPlotsXBackend())
+  perf = performance_profile(stats, dfstat_energy, legend=:bottomright)
   title!("Performance profile (Netlib problems)")
   savefig(perf, save_path)
 end
 
 function netlib_profile_energy2(stats, save_path::String)
-  pgfplotsx()
-  perf = performance_profile(stats, dfstat_energy2, legend=:bottomright, b = SolverBenchmark.BenchmarkProfiles.PGFPlotsXBackend())
+  perf = performance_profile(stats, dfstat_energy2, legend=:bottomright)
   title!("Performance profile (Netlib problems)")
   savefig(perf, save_path)
 end
 
 function mm_profile_time(stats, save_path::String)
-  pgfplotsx()
-  perf = performance_profile(stats, dfstat_time, legend=:bottomright, b = SolverBenchmark.BenchmarkProfiles.PGFPlotsXBackend())
+  perf = performance_profile(stats, dfstat_time, legend=:bottomright)
   title!("Performance profile (Maros and Meszaros problems)")
   savefig(perf, save_path)
 end
 
 function mm_profile_energy(stats, save_path::String)
-  pgfplotsx()
-  perf = performance_profile(stats, dfstat_energy, legend=:bottomright, b = SolverBenchmark.BenchmarkProfiles.PGFPlotsXBackend())
+  perf = performance_profile(stats, dfstat_energy, legend=:bottomright)
   title!("Performance profile (Maros and Meszaros problems)")
   savefig(perf, save_path)
 end
 
 function mm_profile_energy2(stats, save_path::String)
-  pgfplotsx()
-  perf = performance_profile(stats, dfstat_energy2, legend=:bottomright, b = SolverBenchmark.BenchmarkProfiles.PGFPlotsXBackend())
+  perf = performance_profile(stats, dfstat_energy2, legend=:bottomright)
   title!("Performance profile (Maros and Meszaros problems)")
   savefig(perf, save_path)
 end
